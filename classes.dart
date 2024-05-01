@@ -2,9 +2,16 @@ void main () {
 
   var taco = MenuItem("Original Taco", 1.9);
   var pizza = Pizza({"Papper", "Mushroom"}, "Limo Pizza", 3.99);
+  var roast = MenuItem("veggie roast dinner", 11.9);
+  var sushi = MenuItem("Mentai sushi", 1.9);
 
   print(taco);
   print(pizza);
+
+  var foods = Collection<MenuItem>('Menu items', [taco, pizza, roast, sushi]);
+
+  var random = foods.randomItem();
+  print(random);
 }
 
 class MenuItem { // Init a class
@@ -43,6 +50,25 @@ class MenuItem { // Init a class
     @override
     String toString() {
       return "Instance of pizza: $title, $price, $toppings";
+    }
+  }
+
+  class Collection<T> {
+    /*  Generic provide a way to abstract over types, 
+        enabling the creation of classes, functions, 
+        and interfaces that can work with a variety of data types
+     */
+
+    String name;
+    List<T> data;
+
+    Collection(this.name, this.data);
+
+    T randomItem() {
+      data.shuffle();
+
+      return data[0]; // Shuffle the list & return first element
+
     }
   }
 
